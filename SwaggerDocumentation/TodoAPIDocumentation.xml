@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TodoAPI</name>
+    </assembly>
+    <members>
+        <member name="T:TodoAPI.Controllers.TodoController">
+            <summary>
+            Контроллер с CRUD-методами для TodoItem
+            </summary>
+        </member>
+        <member name="M:TodoAPI.Controllers.TodoController.CreateTodo(TodoAPI.Model.TodoItem)">
+            <summary>
+            Создание задачи
+            </summary>
+            <param name="todoItem">Объект задачи</param>
+            <response code="201">Успешное создание задачи</response>
+        </member>
+        <member name="M:TodoAPI.Controllers.TodoController.GetPagedTodos(System.Int32,System.Int32)">
+            <summary>
+            Получение списка задач с пагинацией 
+            </summary>
+            <param name="page">Номер страницы</param>
+            <param name="size">Количество элементов на странице</param>
+            <response code="200">Возвращает объект с метаданными пагинации и списком задач на текущей странице.</response>
+            <response code="400">Введены некорректные параметры запроса</response>
+        </member>
+        <member name="M:TodoAPI.Controllers.TodoController.GetTodoById(System.Int32)">
+            <summary>
+            Получить задачу по ID
+            </summary>
+            <param name="id">Идентификатор задачи</param>
+            <response code="200">Возвращает задачу</response>
+            <response code="404">Задача не найдена</response>
+        </member>
+        <member name="M:TodoAPI.Controllers.TodoController.UpdateTodo(System.Int32,TodoAPI.Model.TodoItem)">
+            <summary>
+            Обновление задачи по ID.
+            </summary>
+            <param name="id">Идентификатор задачи, которую нужно обновить.</param>
+            <param name="todoItem">Объект задачи, содержащий обновленные данные.</param>
+            <response code="400">Id не совпадает с данными в запросе</response>
+            <response code="404">Задача на найдена</response>
+            <response code="200">Задача успешно обновлена</response>
+        </member>
+        <member name="M:TodoAPI.Controllers.TodoController.DeleteTodo(System.Int32)">
+            <summary>
+            Удалить задачу
+            </summary>
+            <param name="id">Id задачи</param>
+            <response code="404">Задача на найдена</response>
+            <response code="204">Задача успешно удалена</response>
+        </member>
+        <member name="T:TodoAPI.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:TodoAPI.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:TodoAPI.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:TodoAPI.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:TodoAPI.Model.TodoItem">
+            <summary>
+            Объект задачи
+            </summary>
+        </member>
+        <member name="P:TodoAPI.Model.TodoItem.Title">
+            <summary>
+            Название задачи
+            </summary>
+            <example>Купить молоко</example>
+        </member>
+        <member name="P:TodoAPI.Model.TodoItem.Description">
+            <summary>
+            Описание задачи
+            </summary>
+            <example>Купить молоко в магазине на углу</example>
+        </member>
+        <member name="P:TodoAPI.Model.TodoItem.IsCompleted">
+            <summary>
+            Статус завершения задачи
+            </summary>
+        </member>
+    </members>
+</doc>
