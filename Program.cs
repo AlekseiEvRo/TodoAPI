@@ -29,6 +29,9 @@ namespace TodoAPI
             builder.Services.AddDbContext<TodoContext>(options =>
                 options.UseSqlite("Data Source=todo.db"));
 
+            builder.Services.AddControllers()
+                .AddNewtonsoftJson();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

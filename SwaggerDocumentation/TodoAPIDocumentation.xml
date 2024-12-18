@@ -51,6 +51,16 @@
             <response code="404">Задача на найдена</response>
             <response code="204">Задача успешно удалена</response>
         </member>
+        <member name="M:TodoAPI.Controllers.TodoController.UpdatePartialTodo(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{TodoAPI.Model.TodoItem})">
+            <summary>
+            Частичное обновление задачи
+            </summary>
+            <param name="id">Идентификатор задачи</param>
+            <param name="patchDoc">JSON Patch документ с изменениями</param>
+            <response code="204">Успешное обновление</response>
+            <response code="400">Ошибка в документе или данных</response>
+            <response code="404">Задача не найдена</response>
+        </member>
         <member name="T:TodoAPI.Migrations.InitialCreate">
             <inheritdoc />
         </member>

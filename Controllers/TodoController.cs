@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TodoAPI.DAL;
 using TodoAPI.Model;
@@ -140,6 +141,45 @@ namespace TodoAPI.Controllers
 
             _context.TodoItems.Remove(todoItem);
             await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Частичное обновление задачи
+        /// </summary>
+        /// <param name="id">Идентификатор задачи</param>
+        /// <param name="patchDoc">JSON Patch документ с изменениями</param>
+        /// <response code="204">Успешное обновление</response>
+        /// <response code="400">Ошибка в документе или данных</response>
+        /// <response code="404">Задача не найдена</response>
+        [HttpPatch("{id}")]
+        [Consumes("application/json-patch+json")]
+        public async Task<IActionResult> UpdatePartialTodo(int id, JsonPatchDocument<TodoItem> patchDoc)
+        {
+            if (patchDoc == null)
+                return BadRequest("Invalid patch document.");
+
+            var todoItem = await _context.TodoItems.FindAsync(id);
+            if (todoItem == null)
+                return NotFound();
+
+            patchDoc.ApplyTo(todoItem, ModelState);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TodoItemExists(id))
+                    return NotFound();
+                else
+                    throw;
+            }
 
             return NoContent();
         }
