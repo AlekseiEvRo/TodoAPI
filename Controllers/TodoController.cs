@@ -25,6 +25,7 @@ namespace TodoAPI.Controllers
         /// </summary>
         /// <param name="todoItem">Объект задачи</param>
         /// <response code="201">Успешное создание задачи</response>
+        /// <response code="400">Отсутствует объект задачи</response>
         [HttpPost]
         public async Task<ActionResult<TodoItem>> CreateTodo(TodoItem todoItem)
         {
